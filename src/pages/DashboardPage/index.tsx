@@ -1,11 +1,8 @@
-import React from 'react'
+import { useAuth } from "../../hooks/useAuth";
 
 const DashboardPage = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const { user } = useAuth();
+  return <div>{user && <p>Olá {user.name}</p>}</div>;
+};
 
-export default DashboardPage
+export default DashboardPage;
