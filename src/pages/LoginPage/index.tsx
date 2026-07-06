@@ -30,27 +30,73 @@ const LoginPage = () => {
     return setErro(false);
   };
   return (
-    <>
-      <form action="" onSubmit={submitData}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={loginUser.email}
-          onChange={dataForm}
-        />
-        <label htmlFor="password">Senha</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={loginUser.password}
-          onChange={dataForm}
-        />
-        <button>Enviar</button>
-      </form>
+    <div className="flex min-h-screen items-center justify-center bg-zinc-100 px-6">
+      <form
+        action=""
+        onSubmit={submitData}
+        className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg"
+      >
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold text-zinc-900">
+            Entrar no Dashboard
+          </h1>
 
+          <p className="mt-2 text-sm text-zinc-500">
+            Faça login para acessar o painel administrativo.
+          </p>
+        </div>
+
+        <div className="space-y-5">
+          <div>
+            <label
+              htmlFor="email"
+              className="mb-2 block text-sm font-medium text-zinc-700"
+            >
+              Email
+            </label>
+
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={loginUser.email}
+              onChange={dataForm}
+              placeholder="Digite seu email"
+              className="w-full rounded-lg border border-zinc-300 px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-zinc-900 focus:ring-2 focus:ring-zinc-200"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="password"
+              className="mb-2 block text-sm font-medium text-zinc-700"
+            >
+              Senha
+            </label>
+
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={loginUser.password}
+              onChange={dataForm}
+              placeholder="Digite sua senha"
+              className="w-full rounded-lg border border-zinc-300 px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-zinc-900 focus:ring-2 focus:ring-zinc-200"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full rounded-lg bg-zinc-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700"
+          >
+            Entrar
+          </button>
+        </div>
+
+        <p className="mt-6 text-center text-sm text-zinc-500">
+          Você será redirecionado para o dashboard após o login.
+        </p>
+      </form>
       {erro && (
         <div
           className="flex p-4 mb-4 text-sm text-red-800 rounded bg-red-50 border border-red-200"
@@ -72,7 +118,7 @@ const LoginPage = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
