@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 interface LoginForm {
@@ -12,6 +13,7 @@ const LoginPage = () => {
   });
   const { login } = useAuth();
   const [erro, setErro] = useState(false);
+  const navigate = useNavigate();
 
   const dataForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,7 +28,8 @@ const LoginPage = () => {
 
     if (!login(loginUser.email, loginUser.password)) {
       return setErro(true);
-    }
+    } else navigate("/");
+
     return setErro(false);
   };
   return (

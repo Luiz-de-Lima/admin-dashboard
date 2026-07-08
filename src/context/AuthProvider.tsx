@@ -5,6 +5,7 @@ import type { User } from "../types";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsloading] = useState(true);
   const isAuthenticated = user !== null;
 
   const login = (email: string, password: string) => {
@@ -25,12 +26,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const userLogged = localStorage.getItem("user");
+
     if (userLogged !== null) {
       setUser(JSON.parse(userLogged));
     }
+    setIsloading(false);
   }, []);
   return (
-    <AuthContext.Provider value={{ login, user, logout, isAuthenticated }}>
+    <AuthContext.Provider
+      value={{ login, user, logout, isAuthenticated, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );
