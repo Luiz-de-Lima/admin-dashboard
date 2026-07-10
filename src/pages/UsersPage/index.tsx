@@ -1,5 +1,5 @@
 import { useUsers } from "../../hooks/useUsers";
-
+import Table from "../../components/Table";
 const UsersPage = () => {
   const { filteredUsers, load, erro } = useUsers();
 
@@ -7,10 +7,7 @@ const UsersPage = () => {
   if (erro) return <p>Erro ao carregar usuários</p>;
   return (
     <div>
-      <ul>
-        {filteredUsers &&
-          filteredUsers.map((user) => <li key={user.id}>{user.name}</li>)}
-      </ul>
+      <Table userTable={filteredUsers} />
     </div>
   );
 };
