@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getUsers } from "../services/useServices";
-import type { User } from "../types";
+import { filterUsers } from "../services/useServices";
+import type { User, UserFilters } from "../types";
 
-const useUsers = () => {
+const useUsers = (resultUser: UserFilters) => {
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [load, setLoad] = useState(false);
   const [erro, setErro] = useState(false);
@@ -11,7 +11,7 @@ const useUsers = () => {
     const loadUser = () => {
       try {
         setLoad(true);
-        const resultado = getUsers();
+        const resultado = filterUsers(resultUser);
         setFilteredUsers(resultado);
         setLoad(false);
       } catch {
@@ -19,7 +19,7 @@ const useUsers = () => {
       }
     };
     loadUser();
-  }, []);
+  }, [resultUser]);
 
   return {
     filteredUsers,
