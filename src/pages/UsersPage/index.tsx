@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { useUsers } from "../../hooks/useUsers";
 import Table from "../../components/Table";
 import Filters from "../../components/Filters";
 import Pagination from "../../components/Pagination";
-
-import type { PaginationState, UserFilters } from "../../types";
 import Modal from "../../components/Modal";
 import UserForm from "../../components/UserForm";
+import { useUsers } from "../../hooks/useUsers";
+import type { PaginationState, User, UserFilters } from "../../types";
+
+type FormErrors = Partial<Record<"name" | "email" | "role" | "status", string>>;
 
 const UsersPage = () => {
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [allPagination, setAllPagination] = useState<PaginationState>({
     currentPage: 1,
@@ -38,9 +41,37 @@ const UsersPage = () => {
     setModalIsOpen(false);
   };
 
-  const handleSubmitForm = () => {
+  const handleSubmitForm = (data: Omit<User, "id" | "createdAt">) => {
+    const errors: FormErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!data.name.trim()) {
+      errors.name = "O nome é obrigatório";
+    }
+
+    if (!data.email.trim()) {
+      errors.email = "O email é obrigatório";
+    } else if (!emailRegex.test(data.email)) {
+      errors.email = "Digite um email válido";
+    }
+
+    if (!data.role) {
+      errors.role = "Selecione uma role";
+    }
+
+    if (!data.status) {
+      errors.status = "Selecione um status";
+    }
+
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
+    console.log("Dados válidos:", data);
     setModalIsOpen(false);
   };
+
   useEffect(() => {
     setAllPagination({
       ...allPagination,
@@ -52,7 +83,11 @@ const UsersPage = () => {
   return (
     <div>
       <Modal isOpen={modalIsOpen} onClose={handleCloseModal}>
-        <UserForm userForm={null} submitForm={handleSubmitForm} />
+        <UserForm
+          userForm={null}
+          submitForm={handleSubmitForm}
+          errors={formErrors}
+        />
       </Modal>
       <button
         onClick={() => setModalIsOpen(true)}

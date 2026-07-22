@@ -3,9 +3,11 @@ import type { User } from "../../types";
 
 interface userFormPros {
   userForm: User | null;
-  submitForm: () => void;
+  submitForm: (data: Omit<User, "id" | "createdAt">) => void;
+  errors: Partial<Record<"name" | "email" | "role" | "status", string>>;
 }
-const UserForm = ({ userForm, submitForm }: userFormPros) => {
+
+const UserForm = ({ userForm, submitForm, errors }: userFormPros) => {
   const [userFormState, setUserFormState] = useState<
     Omit<User, "id" | "createdAt">
   >(
@@ -23,8 +25,15 @@ const UserForm = ({ userForm, submitForm }: userFormPros) => {
           status: "active" as User["status"],
         },
   );
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    submitForm(userFormState);
+  };
   return (
-    <form className="max-w-md space-y-5 rounded-xl bg-white p-6 shadow-md">
+    <form
+      className="max-w-md space-y-5 rounded-xl bg-white p-6 shadow-md"
+      onSubmit={handleSubmitForm}
+    >
       {/* Nome */}
       <div>
         <label className="mb-1 block text-sm font-medium text-gray-700">
@@ -46,6 +55,9 @@ const UserForm = ({ userForm, submitForm }: userFormPros) => {
             setUserFormState({ ...userFormState, name: e.target.value })
           }
         />
+        {errors.name && (
+          <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+        )}
       </div>
 
       {/* Email */}
@@ -69,6 +81,9 @@ const UserForm = ({ userForm, submitForm }: userFormPros) => {
           }
           value={userFormState.email}
         />
+        {errors.email && (
+          <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+        )}
       </div>
 
       <div>
@@ -98,6 +113,9 @@ const UserForm = ({ userForm, submitForm }: userFormPros) => {
 
           <option value="user">User</option>
         </select>
+        {errors.role && (
+          <p className="mt-1 text-sm text-red-600">{errors.role}</p>
+        )}
       </div>
 
       {/* Status */}
@@ -129,7 +147,16 @@ const UserForm = ({ userForm, submitForm }: userFormPros) => {
 
           <option value="inactive">Inativo</option>
         </select>
+        {errors.status && (
+          <p className="mt-1 text-sm text-red-600">{errors.status}</p>
+        )}
       </div>
+      <button
+        type="submit"
+        className="w-full rounded-lg bg-blue-600 px-4 py-2 text-white cursor-pointer"
+      >
+        Salvar
+      </button>
     </form>
   );
 };
