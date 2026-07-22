@@ -6,6 +6,7 @@ import Pagination from "../../components/Pagination";
 
 import type { PaginationState, UserFilters } from "../../types";
 import Modal from "../../components/Modal";
+import UserForm from "../../components/UserForm";
 
 const UsersPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -37,6 +38,9 @@ const UsersPage = () => {
     setModalIsOpen(false);
   };
 
+  const handleSubmitForm = () => {
+    setModalIsOpen(false);
+  };
   useEffect(() => {
     setAllPagination({
       ...allPagination,
@@ -48,7 +52,7 @@ const UsersPage = () => {
   return (
     <div>
       <Modal isOpen={modalIsOpen} onClose={handleCloseModal}>
-        <p>conteudo modal</p>
+        <UserForm userForm={null} submitForm={handleSubmitForm} />
       </Modal>
       <button
         onClick={() => setModalIsOpen(true)}
