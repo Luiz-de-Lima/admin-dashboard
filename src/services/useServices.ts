@@ -73,7 +73,14 @@ const getUsers = () => {
 const getUserById = (id: number) => {
   return users.find((u) => u.id === id);
 };
-
+const deleteUser = (id: number): boolean => {
+  const userIndex = users.findIndex((user) => user.id === id);
+  if (userIndex === -1) {
+    return false;
+  }
+  users.splice(userIndex, 1);
+  return true;
+};
 const filterUsers = (filters: UserFilters) => {
   const userFind = users.filter((user) => {
     let resultado = true;
@@ -103,4 +110,4 @@ const filterUsers = (filters: UserFilters) => {
   });
   return userFind;
 };
-export { users, getUserById, getUsers, filterUsers };
+export { users, getUserById, getUsers, filterUsers, deleteUser };

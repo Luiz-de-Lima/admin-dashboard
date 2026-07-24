@@ -1,9 +1,10 @@
 import type { User } from "../../types";
 interface userProp {
   userTable: User[];
+  onDeleteUser: (user: User) => void;
 }
 
-const Table = ({ userTable }: userProp) => {
+const Table = ({ userTable, onDeleteUser }: userProp) => {
   return (
     <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
       <div className="overflow-x-auto">
@@ -23,6 +24,9 @@ const Table = ({ userTable }: userProp) => {
                 Status
               </th>
             </tr>
+            <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+              Ações
+            </th>
           </thead>
 
           <tbody className="divide-y divide-slate-200 bg-white">
@@ -48,25 +52,30 @@ const Table = ({ userTable }: userProp) => {
                 <td className="whitespace-nowrap px-6 py-4">
                   <span
                     className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset ${
-                      usuario.status === "Ativo"
+                      usuario.status === "active"
                         ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20"
-                        : usuario.status === "Pendente"
-                          ? "bg-amber-50 text-amber-700 ring-amber-600/20"
-                          : "bg-red-50 text-red-700 ring-red-600/20"
+                        : "bg-red-50 text-red-700 ring-red-600/20"
                     }`}
                   >
                     <span
                       className={`mr-1.5 size-1.5 rounded-full ${
                         usuario.status === "active"
                           ? "bg-emerald-500"
-                          : usuario.status === "Pendente"
-                            ? "bg-amber-500"
-                            : "bg-red-500"
+                          : "bg-red-500"
                       }`}
                     />
 
-                    {usuario.status}
+                    {usuario.status === "active" ? "Ativo" : "Inativo"}
                   </span>
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  <button
+                    type="button"
+                    onClick={() => onDeleteUser(usuario)}
+                    className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))}

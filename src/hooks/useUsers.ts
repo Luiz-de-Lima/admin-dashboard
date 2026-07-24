@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { filterUsers } from "../services/useServices";
+import {
+  deleteUser as deleteUserService,
+  filterUsers,
+} from "../services/useServices";
 import type { PaginationState, User, UserFilters } from "../types";
 
 const useUsers = (resultUser: UserFilters, pagination: PaginationState) => {
@@ -7,6 +10,15 @@ const useUsers = (resultUser: UserFilters, pagination: PaginationState) => {
   const [load, setLoad] = useState(false);
   const [erro, setErro] = useState(false);
   const [totalItems, setTotalItems] = useState<number>(0);
+  const [refresh, setRefresh] = useState(0);
+
+  const removeUser = (id: number): boolean => {
+    const deleted = deleteUserService(id);
+    if (deleted) {
+      setRefresh((current) => current + 1);
+    }
+    return deleted;
+  };
 
   useEffect(() => {
     const loadUser = () => {
@@ -28,13 +40,14 @@ const useUsers = (resultUser: UserFilters, pagination: PaginationState) => {
     };
 
     loadUser();
-  }, [resultUser, pagination]);
+  }, [resultUser, pagination, refresh]);
 
   return {
     filteredUsers,
     load,
     erro,
     totalItems,
+    removeUser,
   };
 };
 export { useUsers };
