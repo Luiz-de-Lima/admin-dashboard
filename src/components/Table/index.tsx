@@ -1,10 +1,10 @@
 import type { User } from "../../types";
-interface userProp {
+interface UserProp {
   userTable: User[];
   onDeleteUser: (user: User) => void;
 }
 
-const Table = ({ userTable, onDeleteUser }: userProp) => {
+const Table = ({ userTable, onDeleteUser }: UserProp) => {
   return (
     <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
       <div className="overflow-x-auto">
