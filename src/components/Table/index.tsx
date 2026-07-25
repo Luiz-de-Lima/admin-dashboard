@@ -23,10 +23,10 @@ const Table = ({ userTable, onDeleteUser }: userProp) => {
               <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
                 Status
               </th>
+              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                Ações
+              </th>
             </tr>
-            <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
-              Ações
-            </th>
           </thead>
 
           <tbody className="divide-y divide-slate-200 bg-white">
