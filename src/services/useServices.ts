@@ -94,14 +94,12 @@ const filterUsers = (filters: UserFilters) => {
       }
     }
     if (filters.role !== "") {
-      if (!user.role.toLowerCase().includes(filters.role.toLowerCase())) {
+      if (user.role.toLowerCase() !== filters.role.toLocaleLowerCase()) {
         resultado = false;
       }
     }
     if (filters.status !== "") {
-      if (
-        !user.status.toLowerCase().includes(filters.status.toLocaleLowerCase())
-      ) {
+      if (user.status.toLowerCase() !== filters.status.toLocaleLowerCase()) {
         resultado = false;
       }
     }

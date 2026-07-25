@@ -6,81 +6,205 @@ interface UserProp {
 
 const Table = ({ userTable, onDeleteUser }: UserProp) => {
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-left">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Nome
-              </th>
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Email
-              </th>
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Role
-              </th>
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Status
-              </th>
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Ações
-              </th>
-            </tr>
-          </thead>
+    // <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+    //   <div className="overflow-x-auto">
+    //     <table className="w-full border-collapse text-left">
+    //       <thead className="bg-slate-50">
+    //         <tr>
+    //           <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+    //             Nome
+    //           </th>
+    //           <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+    //             Email
+    //           </th>
+    //           <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+    //             Role
+    //           </th>
+    //           <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+    //             Status
+    //           </th>
+    //           <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+    //             Ações
+    //           </th>
+    //         </tr>
+    //       </thead>
 
-          <tbody className="divide-y divide-slate-200 bg-white">
-            {userTable.map((usuario) => (
-              <tr
-                key={usuario.id}
-                className="transition-colors hover:bg-slate-50"
-              >
-                <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900">
+    //       <tbody className="divide-y divide-slate-200 bg-white">
+    //         {userTable.map((usuario) => (
+    //           <tr
+    //             key={usuario.id}
+    //             className="transition-colors hover:bg-slate-50"
+    //           >
+    //             <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900">
+    //               {usuario.name}
+    //             </td>
+
+    //             <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">
+    //               {usuario.email}
+    //             </td>
+
+    //             <td className="whitespace-nowrap px-6 py-4">
+    //               <span className="inline-flex rounded-md bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700">
+    //                 {usuario.role}
+    //               </span>
+    //             </td>
+
+    //             <td className="whitespace-nowrap px-6 py-4">
+    //               <span
+    //                 className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset ${
+    //                   usuario.status === "active"
+    //                     ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20"
+    //                     : "bg-red-50 text-red-700 ring-red-600/20"
+    //                 }`}
+    //               >
+    //                 <span
+    //                   className={`mr-1.5 size-1.5 rounded-full ${
+    //                     usuario.status === "active"
+    //                       ? "bg-emerald-500"
+    //                       : "bg-red-500"
+    //                   }`}
+    //                 />
+
+    //                 {usuario.status === "active" ? "Ativo" : "Inativo"}
+    //               </span>
+    //             </td>
+    //             <td className="whitespace-nowrap px-6 py-4">
+    //               <button
+    //                 type="button"
+    //                 onClick={() => onDeleteUser(usuario)}
+    //                 className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+    //               >
+    //                 Excluir
+    //               </button>
+    //             </td>
+    //           </tr>
+    //         ))}
+    //       </tbody>
+    //     </table>
+    //   </div>
+    // </div>
+
+    <div>
+      <div className="space-y-4 md:hidden">
+        {userTable.map((usuario) => (
+          <div
+            key={usuario.id}
+            className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h3 className="text-sm font-semibold text-slate-900">
                   {usuario.name}
-                </td>
+                </h3>
 
-                <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">
-                  {usuario.email}
-                </td>
+                <p className="mt-1 text-sm text-slate-500">{usuario.email}</p>
+              </div>
 
-                <td className="whitespace-nowrap px-6 py-4">
-                  <span className="inline-flex rounded-md bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700">
-                    {usuario.role}
-                  </span>
-                </td>
+              <span
+                className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset ${
+                  usuario.status === "active"
+                    ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20"
+                    : "bg-red-50 text-red-700 ring-red-600/20"
+                }`}
+              >
+                {usuario.status === "active" ? "Ativo" : "Inativo"}
+              </span>
+            </div>
 
-                <td className="whitespace-nowrap px-6 py-4">
-                  <span
-                    className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset ${
-                      usuario.status === "active"
-                        ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20"
-                        : "bg-red-50 text-red-700 ring-red-600/20"
-                    }`}
-                  >
-                    <span
-                      className={`mr-1.5 size-1.5 rounded-full ${
-                        usuario.status === "active"
-                          ? "bg-emerald-500"
-                          : "bg-red-500"
-                      }`}
-                    />
+            <div className="mt-4 flex items-center justify-between">
+              <span className="inline-flex rounded-md bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700">
+                {usuario.role}
+              </span>
 
-                    {usuario.status === "active" ? "Ativo" : "Inativo"}
-                  </span>
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  <button
-                    type="button"
-                    onClick={() => onDeleteUser(usuario)}
-                    className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-700"
-                  >
-                    Excluir
-                  </button>
-                </td>
+              <button
+                type="button"
+                onClick={() => onDeleteUser(usuario)}
+                className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+              >
+                Excluir
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm md:block">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-left">
+            <thead className="bg-slate-50">
+              <tr>
+                <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  Nome
+                </th>
+                <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  Email
+                </th>
+                <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  Role
+                </th>
+                <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  Status
+                </th>
+                <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  Ações
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody className="divide-y divide-slate-200 bg-white">
+              {userTable.map((usuario) => (
+                <tr
+                  key={usuario.id}
+                  className="transition-colors hover:bg-slate-50"
+                >
+                  <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900">
+                    {usuario.name}
+                  </td>
+
+                  <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">
+                    {usuario.email}
+                  </td>
+
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <span className="inline-flex rounded-md bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700">
+                      {usuario.role}
+                    </span>
+                  </td>
+
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset ${
+                        usuario.status === "active"
+                          ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20"
+                          : "bg-red-50 text-red-700 ring-red-600/20"
+                      }`}
+                    >
+                      <span
+                        className={`mr-1.5 size-1.5 rounded-full ${
+                          usuario.status === "active"
+                            ? "bg-emerald-500"
+                            : "bg-red-500"
+                        }`}
+                      />
+
+                      {usuario.status === "active" ? "Ativo" : "Inativo"}
+                    </span>
+                  </td>
+
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <button
+                      type="button"
+                      onClick={() => onDeleteUser(usuario)}
+                      className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+                    >
+                      Excluir
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
