@@ -69,7 +69,6 @@ const UsersPage = () => {
       return;
     }
 
-    console.log("Dados válidos:", data);
     setModalIsOpen(false);
   };
   const handleOpenDeleteModal = (user: User) => {
@@ -83,7 +82,6 @@ const UsersPage = () => {
     if (!userToDelete) return;
     const deleted = removeUser(userToDelete.id);
     if (!deleted) {
-      console.error("Usuário não encontrado");
       return;
     }
     setUserToDelete(null);

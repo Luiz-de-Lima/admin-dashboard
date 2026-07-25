@@ -11,6 +11,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = (email: string, password: string) => {
     const allUsers = getUsers();
     const userFound = allUsers.find((u) => u.email === email);
+
+    if (password === "") return false;
     if (userFound) {
       setUser(userFound);
 
